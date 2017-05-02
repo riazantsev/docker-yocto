@@ -15,7 +15,7 @@ RUN curl http://storage.googleapis.com/git-repo-downloads/repo > /usr/local/bin/
 RUN chmod +x /usr/local/bin/repo
 
 # Create a non-root user. TODO: Automate in better way
-RUN id worker 2>/dev/null || useradd --uid 1000 --create-home build
+RUN id worker 2>/dev/null || useradd --uid 1000 --create-home worker
 RUN echo "worker ALL=(ALL) NOPASSWD: ALL" | tee -a /etc/sudoers
 
 # Fix error "Please use a locale setting which supports utf-8."
