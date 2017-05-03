@@ -1,6 +1,7 @@
 FROM ubuntu:16.04
 
 ENV TERM=linux
+ENV LC_ALL=en_US.utf-8
 
 #Update the systeam and install packages we need for Yocto
 RUN apt-get update && apt-get -y upgrade && \
@@ -28,6 +29,11 @@ RUN apt -y install locales   && \
 
 USER worker
 WORKDIR /home/worker
+
+#Do initial git configuration in order to prevent repo fails
+RUN git config --global user.name "John Doe" && \
+    git config --global user.email "jd@umbrellacorp.com"
+
 CMD "/bin/bash"
 
 # EOF
