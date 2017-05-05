@@ -13,7 +13,7 @@ RUN apt-get update && apt-get -y upgrade && \
   build-essential chrpath curl diffstat     \
   gcc-multilib gawk git-core libsdl1.2-dev  \
   texinfo unzip wget python3 cpio nano tree \
-  bzip2 dosfstools mtools parted syslinux
+  bzip2 dosfstools mtools parted syslinux sudo
 
 # Install Google's "repo" tool
 RUN curl http://storage.googleapis.com/git-repo-downloads/repo > /usr/local/bin/repo
