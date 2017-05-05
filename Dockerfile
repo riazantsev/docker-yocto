@@ -31,14 +31,18 @@ RUN apt -y install locales   && \
   locale-gen en_US.UTF-8   && \
   update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 
+COPY ./docker_build_helper.sh /usr/bin/build_helper.sh
+
+# Switch to actual user and finalize
 USER ${DOCKER_USER_NAME}
+RUN sudo mkdir -p ${DOCKER_WORK_DIR} && sudo chown -R $(id -u):$(id -g) ${DOCKER_WORK_DIR}
+
 WORKDIR /home/${DOCKER_USER_NAME}
 
 #Do initial git configuration in order to prevent repo fails
 RUN git config --global user.name "John Doe" && \
-    git config --global user.email "jd@umbrellacorp.com"
-
-COPY ./docker_build_helper.sh /usr/bin/build_helper.sh
+    git config --global user.email "jd@umbrellacorp.com" && \
+    git config --global color.ui false
 
 CMD "/bin/bash"
 
