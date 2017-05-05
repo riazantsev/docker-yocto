@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
@@ -30,17 +30,18 @@ function do_repo_init {
 }
 
 function do_repo_sync {
-    [ -a $WORK_DIR/.repo ] || echo "repo was not init for workdir. Use 'init' first" && exit 1
+    [ -a $DOCKER_WORK_DIR/.repo ] || (echo "repo was not init for workdir. Use 'init' first"; exit 1)
     $REPO sync
 }
 
 function do_build_init {
     [ -z $DOCKER_BUILD_DIR ] && DOCKER_BUILD_DIR=build
     OLD_DIR=`pwd`
+    export BB_ENV_EXTRAWHITE="$BB_ENV_EXTRAWHITE LOCAL_BSPROOT"
+    export LOCAL_BSPROOT=${DOCKER_WORK_DIR}
     . poky/oe-init-build-env ${DOCKER_BUILD_DIR}
     cp ${OLD_DIR}/pana/meta-pana/conf/bblayers.conf.sample.${MACHINE} ./conf/bblayers.conf
     cp ${OLD_DIR}/pana/meta-pana/conf/local.conf.sample.${MACHINE} ./conf/local.conf
-    sed -ie "s/BSPROOT =.*/BSPROOT = \"${OLD_DIR}\"/g" ./conf/bblayers.conf
 }
 
 function do_fetch {
