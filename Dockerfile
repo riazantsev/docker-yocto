@@ -6,6 +6,7 @@ ENV DOCKER_USER_NAME=worker
 ENV DOCKER_WORK_DIR=/home/${DOCKER_USER_NAME}/work
 ENV DOCKER_BUILD_DIR=build
 ENV DOCKER_UID=1000
+ENV DOCKER_YOCTO_VERSION=0.5.1
 
 #Update the systeam and install packages we need for Yocto
 RUN apt-get update && apt-get -y upgrade && \
