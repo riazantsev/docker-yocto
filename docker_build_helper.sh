@@ -69,8 +69,6 @@ function do_add_auth {
 
 shift
 
-sudo chown $(id -u):$(id -g) ${DOCKER_WORK_DIR}
-
 case $CMD in
      #here is a hack. please be aware
      "all")
