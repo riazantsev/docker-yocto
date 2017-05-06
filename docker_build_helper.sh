@@ -58,9 +58,26 @@ function do_deploy {
     echo "No deploy"
 }
 
+function do_entry {
+    /bin/bash
+}
+
+function do_add_auth {
+    [ $# -eq 3 ] || (echo "add_auth: wrong argument numbers")
+    echo "machine ${1} login ${2} password ${3}" >> ${HOME}/.netrc
+}
+
 shift
 
+sudo chown $(id -u):$(id -g) ${DOCKER_WORK_DIR}
+
 case $CMD in
+    "add_auth")
+        do_add_auth $@
+        ;;
+    "entry")
+        do_entry $@
+        ;;
     "init")
         do_repo_init $@
         ;;
