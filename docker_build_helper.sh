@@ -72,6 +72,16 @@ shift
 sudo chown $(id -u):$(id -g) ${DOCKER_WORK_DIR}
 
 case $CMD in
+     #here is a hack. please be aware
+     "all")
+        do_add_auth $@
+        shift 3
+        do_repo_init $@
+        shift 2
+        do_repo_sync
+        do_build
+        do_deploy $@
+        ;;
     "add_auth")
         do_add_auth $@
         ;;
