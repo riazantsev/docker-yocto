@@ -25,7 +25,7 @@ pushd  $DOCKER_WORK_DIR
 [ -a ./.netrc ] && cp ./.netrc ~
 
 function do_repo_init {
-    [ $# -eq 2 ] || (echo "wrong init command format";  usage;  exit 1)
+    [ $# -lt 2 ] && (echo "wrong init command format";  usage;  exit 1)
     $REPO init -u $1 -b $2
 }
 
@@ -63,7 +63,7 @@ function do_entry {
 }
 
 function do_add_auth {
-    [ $# -eq 3 ] || (echo "add_auth: wrong argument numbers")
+    [ $# -lt 3 ] && (echo "add_auth: wrong argument numbers"; usage; exit 1)
     echo "machine ${1} login ${2} password ${3}" >> ${HOME}/.netrc
 }
 
