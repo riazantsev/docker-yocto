@@ -51,6 +51,8 @@ RUN git config --global user.name "John Doe" && \
     git config --global user.email "jd@umbrellacorp.com" && \
     git config --global color.ui false
 
+USER root
+
 ENTRYPOINT ["build_helper.sh"]
 CMD ["entry"]
 
