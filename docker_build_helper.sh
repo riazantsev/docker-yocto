@@ -25,7 +25,7 @@ pushd  $DOCKER_WORK_DIR
 [ -a ./.netrc ] && cp ./.netrc ~
 
 function do_repo_init {
-    [ $# -lt 2 ] && (echo "wrong init command format";  usage;  exit 1)
+    [ $# -lt 2 ] && (echo "Wrong init command arguments: $@";  usage;  exit 1)
     $REPO init -u $1 -b $2
 }
 
